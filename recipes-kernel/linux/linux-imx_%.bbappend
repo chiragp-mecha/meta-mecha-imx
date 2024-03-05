@@ -1,175 +1,233 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
-PATCHTOOL = "git"
+#PATCHTOOL = "git"
 
-SRC_URI:append = "  file://0001-Add-imx8mm-mecha-som-gen1-dtb.patch \
-				    file://0002-Add-imx8mm-mecha-comet-m-gen1-dtb.patch \
-					file://0003-Change-gpu-drm-panel-sitronix-st7701-c.patch \
-					file://0004-Fix-cpu-governer-issue.patch \
-					file://0005-Resolve-LCD-issue-in-weston.patch \
-					file://0006-Add-support-of-edt-ft5x06-touchscreen-mickledore.patch \
-					file://0007-Fix-default-gpio-configuration-mickledore.patch \
-					file://0008-Add-support-for-max98090-91-audio-codec-mickledore.patch \
-					file://0009-Etnaviv-driver-enable-in-imx8mm-dtsi-mickledore.patch \
-					file://0011-Add-imx8mm-mecha-som-gen1-ramfs-dts.patch \
-					file://0012-Update-fual-gauge-calibration.patch \ 
-					file://0013-Resolve-camera-invert-preview-issue.patch \
-					file://0014-Added-support-to-compile-dtbs-with-symbols.patch \
-					file://0015-Resolved-issue-of-display-with-overlay.patch \
-					file://0017-Change-linux-logo.patch \
-			  	 "
+SRC_URI = "git://github.com/chiragp-mecha/linux-imx.git;protocol=https;branch=mickledore-6.1.22"
+SRCREV = "373c3ee128e7a79db49a895b462fbb530f4586d5"
 
-do_configure:append () {
-	echo "############ Writing MECHA configs ############### "
-	#May produce warning
-	config="${B}/.config"
+# SRC_URI:append = "  file://0001-Add-imx8mm-mecha-som-gen1-dtb.patch \ 
+# 				    file://0002-Add-imx8mm-mecha-comet-m-gen1-dtb.patch \ 
+# 					file://0003-Change-gpu-drm-panel-sitronix-st7701-c.patch \ 
+# 					file://0004-Fix-cpu-governer-issue.patch \ 
+# 					file://0005-Resolve-LCD-issue-in-weston.patch \ 
+# 					file://0006-Add-support-of-edt-ft5x06-touchscreen-mickledore.patch \ 
+# 					file://0007-Fix-default-gpio-configuration-mickledore.patch \ 
+# 					file://0008-Add-support-for-max98090-91-audio-codec-mickledore.patch \ 
+# 					file://0009-Etnaviv-driver-enable-in-imx8mm-dtsi-mickledore.patch \ 
+# 					file://0011-Add-imx8mm-mecha-som-gen1-ramfs-dts.patch \ 
+# 					file://0012-Update-fual-gauge-calibration.patch \ 
+# 					file://0013-Resolve-camera-invert-preview-issue.patch \ 
+# 					file://0014-Added-support-to-compile-dtbs-with-symbols.patch \ 
+# 					file://0015-Resolved-issue-of-display-with-overlay.patch \ 
+# 					file://0017-Change-linux-logo.patch \ 
+# 					file://0018-Add-mecha-v8-defconfig.patch \ 
+# 			  	 "
 
-	echo "############ Writing MECHA configs ############" >> $config
-	#############  4GB-SOM Changes  ############### 
+IMX_KERNEL_CONFIG_AARCH64 = "mecha_v8_defconfig"
 
-	sed -i "/CONFIG_PCI_LAYERSCAPE[=]/d" $config
-	echo "CONFIG_PCI_LAYERSCAPE=n" >> $config
+# do_configure:append () {
+# 	echo "############ Writing MECHA configs ############### "
+# 	#May produce warning
+# 	config="${B}/.config"
 
-	sed -i "/CONFIG_PCI_IMX6[=]/d" $config
-	echo "CONFIG_PCI_IMX6=n" >> $config
+# 	echo "############ Writing MECHA configs ############" >> $config
+# 	#############  4GB-SOM Changes  ############### 
 
-	sed -i "/CONFIG_PCI_IMX6_HOST[=]/d" $config
-	echo "CONFIG_PCI_IMX6_HOST=n" >> $config
+# 	sed -i "/CONFIG_PCI_LAYERSCAPE[=]/d" $config
+# 	echo "CONFIG_PCI_LAYERSCAPE=n" >> $config
 
-	sed -i "/CONFIG_PCI_IMX6_EP[=]/d" $config
-	echo "CONFIG_PCI_IMX6_EP=n" >> $config
+# 	sed -i "/CONFIG_PCI_IMX6[=]/d" $config
+# 	echo "CONFIG_PCI_IMX6=n" >> $config
 
-	############ etnaviv enable configs ############
-	echo "############ etnaviv enable configs ############" >> $config
+# 	sed -i "/CONFIG_PCI_IMX6_HOST[=]/d" $config
+# 	echo "CONFIG_PCI_IMX6_HOST=n" >> $config
 
-	sed -i "/CONFIG_DRM_ETNAVIV[ =]/d" $config
-	echo "CONFIG_DRM_ETNAVIV=y" >> $config
+# 	sed -i "/CONFIG_PCI_IMX6_EP[=]/d" $config
+# 	echo "CONFIG_PCI_IMX6_EP=n" >> $config
 
-	sed -i "/CONFIG_DRM_ETNAVIV_THERMAL[ =]/d" $config
-	echo "CONFIG_DRM_ETNAVIV_THERMAL=y" >> $config
+# 	############ etnaviv enable configs ############
+# 	echo "############ etnaviv enable configs ############" >> $config
 
-	############ ############ ############
+# 	sed -i "/CONFIG_DRM_ETNAVIV[ =]/d" $config
+# 	echo "CONFIG_DRM_ETNAVIV=y" >> $config
 
-	sed -i "/CONFIG_GPIO_SYSFS[ =]/d" $config
-	echo "CONFIG_GPIO_SYSFS=y" >> $config
+# 	sed -i "/CONFIG_DRM_ETNAVIV_THERMAL[ =]/d" $config
+# 	echo "CONFIG_DRM_ETNAVIV_THERMAL=y" >> $config
+
+# 	############ ############ ############
+
+# 	sed -i "/CONFIG_GPIO_SYSFS[ =]/d" $config
+# 	echo "CONFIG_GPIO_SYSFS=y" >> $config
 	
-	sed -i "/CONFIG_DRM_PANEL_SITRONIX_ST7701[ =]/d" $config
-	echo "CONFIG_DRM_PANEL_SITRONIX_ST7701=y" >> $config
+# 	sed -i "/CONFIG_DRM_PANEL_SITRONIX_ST7701[ =]/d" $config
+# 	echo "CONFIG_DRM_PANEL_SITRONIX_ST7701=y" >> $config
 
-	sed -i "/CONFIG_TOUCHSCREEN_EDT_FT5X06[ =]/d" $config
-	echo "CONFIG_TOUCHSCREEN_EDT_FT5X06=y" >> $config
+# 	sed -i "/CONFIG_TOUCHSCREEN_EDT_FT5X06[ =]/d" $config
+# 	echo "CONFIG_TOUCHSCREEN_EDT_FT5X06=y" >> $config
 
-	sed -i "/CONFIG_TI_ADS1015[ =]/d" $config
-	echo "CONFIG_TI_ADS1015=y" >> $config
+# 	sed -i "/CONFIG_TI_ADS1015[ =]/d" $config
+# 	echo "CONFIG_TI_ADS1015=y" >> $config
 
-	sed -i "/CONFIG_BRCMUTIL[ =]/d" $config
-	echo "CONFIG_BRCMUTIL=y" >> $config
+# 	sed -i "/CONFIG_BRCMUTIL[ =]/d" $config
+# 	echo "CONFIG_BRCMUTIL=y" >> $config
 
-	sed -i "/CONFIG_BRCMFMAC[ =]/d" $config
-	echo "CONFIG_BRCMFMAC=y" >> $config
+# 	sed -i "/CONFIG_BRCMFMAC[ =]/d" $config
+# 	echo "CONFIG_BRCMFMAC=y" >> $config
 
-	sed -i "/CONFIG_BRCMFMAC_PROTO_BCDC[ =]/d" $config
-	echo "CONFIG_BRCMFMAC_PROTO_BCDC=y" >> $config
+# 	sed -i "/CONFIG_BRCMFMAC_PROTO_BCDC[ =]/d" $config
+# 	echo "CONFIG_BRCMFMAC_PROTO_BCDC=y" >> $config
 
-	sed -i "/CONFIG_BRCMFMAC_PROTO_MSGBUF[ =]/d" $config
-	echo "CONFIG_BRCMFMAC_PROTO_MSGBUF=y" >> $config
+# 	sed -i "/CONFIG_BRCMFMAC_PROTO_MSGBUF[ =]/d" $config
+# 	echo "CONFIG_BRCMFMAC_PROTO_MSGBUF=y" >> $config
 
-	sed -i "/CONFIG_BRCMFMAC_SDIO[ =]/d" $config
-	echo "CONFIG_BRCMFMAC_SDIO=y" >> $config
+# 	sed -i "/CONFIG_BRCMFMAC_SDIO[ =]/d" $config
+# 	echo "CONFIG_BRCMFMAC_SDIO=y" >> $config
 
-	sed -i "/CONFIG_BRCMFMAC_PCIE[ =]/d" $config
-	echo "CONFIG_BRCMFMAC_PCIE=y" >> $config
+# 	sed -i "/CONFIG_BRCMFMAC_PCIE[ =]/d" $config
+# 	echo "CONFIG_BRCMFMAC_PCIE=y" >> $config
 
-	sed -i "/CONFIG_WLAN_VENDOR_BROADCOM[ =]/d" $config
-	echo "CONFIG_WLAN_VENDOR_BROADCOM=y" >> $config
+# 	sed -i "/CONFIG_WLAN_VENDOR_BROADCOM[ =]/d" $config
+# 	echo "CONFIG_WLAN_VENDOR_BROADCOM=y" >> $config
 
-	sed -i "/CONFIG_WLAN[ =]/d" $config
-	echo "CONFIG_WLAN=y" >> $config
+# 	sed -i "/CONFIG_WLAN[ =]/d" $config
+# 	echo "CONFIG_WLAN=y" >> $config
 
-	sed -i "/CONFIG_RTC_DRV_PCF8563[ =]/d" $config
-	echo "CONFIG_RTC_DRV_PCF8563=y" >> $config
+# 	sed -i "/CONFIG_RTC_DRV_PCF8563[ =]/d" $config
+# 	echo "CONFIG_RTC_DRV_PCF8563=y" >> $config
 
-	sed -i "/# CONFIG_CRYPTO_DEV_FSL_CAAM[ =]/d" $config
-	echo "CONFIG_CRYPTO_DEV_FSL_CAAM=y" >> $config
+# 	sed -i "/# CONFIG_CRYPTO_DEV_FSL_CAAM[ =]/d" $config
+# 	echo "CONFIG_CRYPTO_DEV_FSL_CAAM=y" >> $config
 
-	sed -i "/CONFIG_CRYPTO_TLS[ =]/d" $config
-	echo "CONFIG_CRYPTO_TLS=y" >> $config
+# 	sed -i "/CONFIG_CRYPTO_TLS[ =]/d" $config
+# 	echo "CONFIG_CRYPTO_TLS=y" >> $config
 
-	sed -i "/CONFIG_DM_CRYPT[ =]/d" $config
-	echo "CONFIG_DM_CRYPT=y" >> $config
+# 	sed -i "/CONFIG_DM_CRYPT[ =]/d" $config
+# 	echo "CONFIG_DM_CRYPT=y" >> $config
 
-	sed -i "/# CONFIG_CRYPTO_DEV_FSL_CAAM_DMA[ =]/d" $config
-	echo "CONFIG_CRYPTO_DEV_FSL_CAAM_DMA=y" >> $config
+# 	sed -i "/# CONFIG_CRYPTO_DEV_FSL_CAAM_DMA[ =]/d" $config
+# 	echo "CONFIG_CRYPTO_DEV_FSL_CAAM_DMA=y" >> $config
 
-	sed -i "/# CONFIG_TLS[ =]/d" $config
-	echo "CONFIG_TLS=y" >> $config
+# 	sed -i "/# CONFIG_TLS[ =]/d" $config
+# 	echo "CONFIG_TLS=y" >> $config
 
-	sed -i "/CONFIG_CRYPTO_USER_API_AEAD[ =]/d" $config
-	echo "CONFIG_CRYPTO_USER_API_AEAD=y" >> $config
+# 	sed -i "/CONFIG_CRYPTO_USER_API_AEAD[ =]/d" $config
+# 	echo "CONFIG_CRYPTO_USER_API_AEAD=y" >> $config
 
-	sed -i "/# CONFIG_PKCS8_PRIVATE_KEY_PARSER[ =]/d" $config
-	echo "CONFIG_PKCS8_PRIVATE_KEY_PARSER=y" >> $config
+# 	sed -i "/# CONFIG_PKCS8_PRIVATE_KEY_PARSER[ =]/d" $config
+# 	echo "CONFIG_PKCS8_PRIVATE_KEY_PARSER=y" >> $config
 
-	sed -i "/# CONFIG_PKCS7_TEST_KEY[ =]/d" $config
-	echo "CONFIG_PKCS7_TEST_KEY=y" >> $config
+# 	sed -i "/# CONFIG_PKCS7_TEST_KEY[ =]/d" $config
+# 	echo "CONFIG_PKCS7_TEST_KEY=y" >> $config
 
-	sed -i "/CONFIG_CRYPTO_TEST=m/d" $config
-	echo "CONFIG_CRYPTO_TEST=y" >> $config
+# 	sed -i "/CONFIG_CRYPTO_TEST=m/d" $config
+# 	echo "CONFIG_CRYPTO_TEST=y" >> $config
 
-	sed -i "/CONFIG_BLK_DEV_DM[ =]/d" $config
-	echo "CONFIG_BLK_DEV_DM=y" >> $config
+# 	sed -i "/CONFIG_BLK_DEV_DM[ =]/d" $config
+# 	echo "CONFIG_BLK_DEV_DM=y" >> $config
 
-	sed -i "/CONFIG_CRYPTO_USER_API[ =]/d" $config
-	echo "CONFIG_CRYPTO_USER_API=y" >> $config
+# 	sed -i "/CONFIG_CRYPTO_USER_API[ =]/d" $config
+# 	echo "CONFIG_CRYPTO_USER_API=y" >> $config
 
-	sed -i "/CONFIG_CRYPTO_USER_API_HASH[ =]/d" $config
-	echo "CONFIG_CRYPTO_USER_API_HASH=y" >> $config
+# 	sed -i "/CONFIG_CRYPTO_USER_API_HASH[ =]/d" $config
+# 	echo "CONFIG_CRYPTO_USER_API_HASH=y" >> $config
 
-	sed -i "/CONFIG_CRYPTO_USER_API_SKCIPHER[ =]/d" $config
-	echo "CONFIG_CRYPTO_USER_API_SKCIPHER=y" >> $config
+# 	sed -i "/CONFIG_CRYPTO_USER_API_SKCIPHER[ =]/d" $config
+# 	echo "CONFIG_CRYPTO_USER_API_SKCIPHER=y" >> $config
 
-	sed -i "/CONFIG_CRYPTO_USER_API_RNG[ =]/d" $config
-	echo "CONFIG_CRYPTO_USER_API_RNG=y" >> $config
+# 	sed -i "/CONFIG_CRYPTO_USER_API_RNG[ =]/d" $config
+# 	echo "CONFIG_CRYPTO_USER_API_RNG=y" >> $config
 
-	sed -i "/CONFIG_CRYPTO_USER_API_RNG[ =]/d" $config
-	echo "CONFIG_CRYPTO_USER_API_RNG=y" >> $config
+# 	sed -i "/CONFIG_CRYPTO_USER_API_RNG[ =]/d" $config
+# 	echo "CONFIG_CRYPTO_USER_API_RNG=y" >> $config
 
-	sed -i "/CONFIG_CRYPTO_DEV_FSL_CAAM_TK_API[ =]/d" $config
-	echo "CONFIG_CRYPTO_DEV_FSL_CAAM_TK_API=y" >> $config
+# 	sed -i "/CONFIG_CRYPTO_DEV_FSL_CAAM_TK_API[ =]/d" $config
+# 	echo "CONFIG_CRYPTO_DEV_FSL_CAAM_TK_API=y" >> $config
 
-	sed -i "/CONFIG_RTC_DRV_PCF8563[ =]/d" $config
-	echo "CONFIG_RTC_DRV_PCF8563=y" >> $config
+# 	sed -i "/CONFIG_RTC_DRV_PCF8563[ =]/d" $config
+# 	echo "CONFIG_RTC_DRV_PCF8563=y" >> $config
 	
-	############ Default CPU Governer ##############
-	sed -i "/# CONFIG_CPU_FREQ_DEFAULT_GOV_USERSPACE[ =]/d" $config
-	echo "CONFIG_CPU_FREQ_DEFAULT_GOV_USERSPACE=y" >> $config
+# 	############ Default CPU Governer ##############
+# 	sed -i "/# CONFIG_CPU_FREQ_DEFAULT_GOV_USERSPACE[ =]/d" $config
+# 	echo "CONFIG_CPU_FREQ_DEFAULT_GOV_USERSPACE=y" >> $config
 
-	############ Portable Kernel Modules ###########
-	sed -i "/CONFIG_MXC_CAMERA_OV5640_MIPI_V2[ =]/d" $config
-	echo "CONFIG_MXC_CAMERA_OV5640_MIPI_V2=m" >> $config
+# 	############ Portable Kernel Modules ###########
+# 	sed -i "/CONFIG_MXC_CAMERA_OV5640_MIPI_V2[ =]/d" $config
+# 	echo "CONFIG_MXC_CAMERA_OV5640_MIPI_V2=m" >> $config
 
-	sed -i "/CONFIG_SND_SOC_MAX98090[ =]/d" $config
-	echo "CONFIG_SND_SOC_MAX98090=y" >> $config
+# 	sed -i "/CONFIG_SND_SOC_MAX98090[ =]/d" $config
+# 	echo "CONFIG_SND_SOC_MAX98090=y" >> $config
 
-	sed -i "/CONFIG_BATTERY_BQ27XXX[ =]/d" $config
-	echo "CONFIG_BATTERY_BQ27XXX=m" >> $config
+# 	sed -i "/CONFIG_BATTERY_BQ27XXX[ =]/d" $config
+# 	echo "CONFIG_BATTERY_BQ27XXX=m" >> $config
 
-	sed -i "/CONFIG_BATTERY_BQ27XXX_I2C[ =]/d" $config
-	echo "CONFIG_BATTERY_BQ27XXX_I2C=m" >> $config
+# 	sed -i "/CONFIG_BATTERY_BQ27XXX_I2C[ =]/d" $config
+# 	echo "CONFIG_BATTERY_BQ27XXX_I2C=m" >> $config
 
-	sed -i "/CONFIG_INV_ICM42600_I2C[ =]/d" $config
-	echo "CONFIG_INV_ICM42600_I2C=m" >> $config
+# 	sed -i "/CONFIG_INV_ICM42600_I2C[ =]/d" $config
+# 	echo "CONFIG_INV_ICM42600_I2C=m" >> $config
 
-	sed -i "/CONFIG_CHARGER_BQ25890[ =]/d" $config
-	echo "CONFIG_CHARGER_BQ25890=y" >> $config
+# 	sed -i "/CONFIG_CHARGER_BQ25890[ =]/d" $config
+# 	echo "CONFIG_CHARGER_BQ25890=y" >> $config
 
-	sed -i "/CONFIG_STRICT_DEVMEM[ =]/d" $config
-	echo "CONFIG_STRICT_DEVMEM=n" >> $config
+# 	sed -i "/CONFIG_STRICT_DEVMEM[ =]/d" $config
+# 	echo "CONFIG_STRICT_DEVMEM=n" >> $config
 
-	sed -i "/CONFIG_DEVMEM[ =]/d" $config
-	echo "CONFIG_DEVMEM=n" >> $config
+# 	sed -i "/CONFIG_DEVMEM[ =]/d" $config
+# 	echo "CONFIG_DEVMEM=n" >> $config
 
-}
+# }
+
+
+# # 4-GB SOM changes
+# CONFIG_PCI_LAYERSCAPE=n
+# CONFIG_PCI_IMX6=n
+# CONFIG_PCI_IMX6_HOST=n
+# CONFIG_PCI_IMX6_EP=n
+
+# # etnaviv configs
+# CONFIG_DRM_ETNAVIV=y
+# CONFIG_DRM_ETNAVIV_THERMAL=y
+
+# CONFIG_GPIO_SYSFS=y
+# CONFIG_DRM_PANEL_SITRONIX_ST7701=y
+# CONFIG_TOUCHSCREEN_EDT_FT5X06=y
+# CONFIG_TI_ADS1015=y
+# CONFIG_BRCMUTIL=y
+# CONFIG_BRCMFMAC=y
+# CONFIG_BRCMFMAC_PROTO_BCDC=y
+# CONFIG_BRCMFMAC_PROTO_MSGBUF=y
+# CONFIG_BRCMFMAC_SDIO=y
+# CONFIG_BRCMFMAC_PCIE=y
+# CONFIG_WLAN_VENDOR_BROADCOM=y
+# CONFIG_WLAN=y
+# CONFIG_RTC_DRV_PCF8563=y
+# CONFIG_CRYPTO_DEV_FSL_CAAM=y
+# CONFIG_CRYPTO_TLS=y
+# CONFIG_DM_CRYPT=y
+# CONFIG_CRYPTO_DEV_FSL_CAAM_DMA=y
+# CONFIG_TLS=y
+# CONFIG_CRYPTO_USER_API_AEAD=y
+# CONFIG_PKCS8_PRIVATE_KEY_PARSER=y
+# CONFIG_PKCS7_TEST_KEY=y
+# CONFIG_CRYPTO_TEST=y
+# CONFIG_BLK_DEV_DM=y
+# CONFIG_CRYPTO_USER_API=y
+# CONFIG_CRYPTO_USER_API_HASH=y
+# CONFIG_CRYPTO_USER_API_SKCIPHER=y
+# CONFIG_CRYPTO_USER_API_RNG=y
+# CONFIG_CRYPTO_USER_API_RNG=y
+# CONFIG_CRYPTO_DEV_FSL_CAAM_TK_API=y
+# CONFIG_STRICT_DEVMEM=n
+# CONFIG_DEVMEM=n
+
+# CONFIG_RTC_DRV_PCF8563=y
+# CONFIG_CPU_FREQ_DEFAULT_GOV_USERSPACE=y
+# CONFIG_MXC_CAMERA_OV5640_MIPI_V2=m
+# CONFIG_SND_SOC_MAX98090=y
+# CONFIG_BATTERY_BQ27XXX=m
+# CONFIG_BATTERY_BQ27XXX_I2C=m
+# CONFIG_INV_ICM42600_I2C=m
+# CONFIG_CHARGER_BQ25890=y
 
 # echo "############ Kernel configs for firewall ############" >> $config
 

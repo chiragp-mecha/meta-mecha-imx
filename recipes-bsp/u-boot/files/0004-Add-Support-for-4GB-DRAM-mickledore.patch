@@ -1,6 +1,6 @@
-From 53a7ccb6117557a7dc2fe01038490977f5dcb6eb Mon Sep 17 00:00:00 2001
+From 0e1cdb8c2398a6f6c7025a66a1a343ec7bf22f25 Mon Sep 17 00:00:00 2001
 From: chiragp-mechas <chiragp@mechasystems.com>
-Date: Thu, 30 Nov 2023 17:24:34 +0530
+Date: Fri, 23 Feb 2024 14:55:19 +0530
 Subject: [PATCH] Add-Support-for-4GB-DRAM-mickledore
 
 ---
@@ -9,15 +9,14 @@ Subject: [PATCH] Add-Support-for-4GB-DRAM-mickledore
  2 files changed, 10 insertions(+)
 
 diff --git a/configs/imx8mm_evk_defconfig b/configs/imx8mm_evk_defconfig
-index 241c0ac5cc..eec5c89f44 100644
+index 5658528fd9..b8303fd62b 100644
 --- a/configs/imx8mm_evk_defconfig
 +++ b/configs/imx8mm_evk_defconfig
-@@ -231,3 +231,4 @@ CONFIG_EFI_HAVE_CAPSULE_UPDATE=y
+@@ -227,3 +227,4 @@ CONFIG_EFI_HAVE_CAPSULE_UPDATE=y
  CONFIG_FIT_SIGNATURE=y
  CONFIG_DM_RNG=y
  CONFIG_KASLR=y
 +CONFIG_IMX8M_4G_LPDDR4=y
-\ No newline at end of file
 diff --git a/include/configs/imx8mm_evk.h b/include/configs/imx8mm_evk.h
 index f4a9f0b833..2b7e842f35 100644
 --- a/include/configs/imx8mm_evk.h

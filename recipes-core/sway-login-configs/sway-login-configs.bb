@@ -12,6 +12,7 @@ SRC_URI =   "file://bin/sway-greetd \
              file://etc-greetd/sway-config \
              file://etc-pamd/greetd \
              file://etc-profiled/sway.sh \
+             file://etc-profiled/welcome.sh \
             "
 
 S = "${WORKDIR}"
@@ -44,6 +45,7 @@ do_install() {
 
     install -d ${D}/etc/profile.d
     install -c -m 0644 ${WORKDIR}/etc-profiled/sway.sh ${D}/etc/profile.d
+    install -c -m 0644 ${WORKDIR}/etc-profiled/welcome.sh ${D}/etc/profile.d
 }
 
 INSANE_SKIP_${PN}:append = "already-stripped"

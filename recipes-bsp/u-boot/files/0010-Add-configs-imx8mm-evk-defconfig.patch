@@ -1,0 +1,27 @@
+From cfb49a5ebfc1d710ba5d48e88037c623c4508814 Mon Sep 17 00:00:00 2001
+From: chiragp-mechas <chiragp@mechasystems.com>
+Date: Fri, 23 Feb 2024 16:03:44 +0530
+Subject: [PATCH] Add-configs-imx8mm-evk-defconfig
+
+---
+ configs/imx8mm_evk_defconfig | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/configs/imx8mm_evk_defconfig b/configs/imx8mm_evk_defconfig
+index b64cd2afc4..e8ee387d6b 100644
+--- a/configs/imx8mm_evk_defconfig
++++ b/configs/imx8mm_evk_defconfig
+@@ -232,3 +232,10 @@ CONFIG_FIT_SIGNATURE=y
+ CONFIG_DM_RNG=y
+ CONFIG_KASLR=y
+ CONFIG_IMX8M_4G_LPDDR4=y
++
++CONFIG_CMD_IMPORTENV=y
++CONFIG_SPLASH_SOURCE=y
++CONFIG_BOOTDELAY=0
++
++
++
+-- 
+2.25.1
+
