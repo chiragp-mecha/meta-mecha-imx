@@ -1,0 +1,27 @@
+From 47b0755cf781e8ae5b81d665ee2753f3b179daa8 Mon Sep 17 00:00:00 2001
+From: chiragp-mechas <chiragp@mechasystems.com>
+Date: Wed, 6 Mar 2024 14:52:40 +0000
+Subject: [PATCH] Change-cma-memory
+
+---
+ arch/arm64/boot/dts/freescale/imx8mm.dtsi | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/arch/arm64/boot/dts/freescale/imx8mm.dtsi b/arch/arm64/boot/dts/freescale/imx8mm.dtsi
+index 34b6e6759e37..a3cd8400beca 100755
+--- a/arch/arm64/boot/dts/freescale/imx8mm.dtsi
++++ b/arch/arm64/boot/dts/freescale/imx8mm.dtsi
+@@ -189,8 +189,8 @@ resmem: reserved-memory {
+ 		linux,cma {
+ 			compatible = "shared-dma-pool";
+ 			reusable;
+-			size = <0 0x28000000>;
+-			alloc-ranges = <0 0x80000000 0 0x40000000>;
++			size = <0 0x14000000>;
++			alloc-ranges = <0 0x40000000 0 0xC0000000>;
+ 			linux,cma-default;
+ 		};
+ 	};
+-- 
+2.39.3
+

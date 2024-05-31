@@ -1,6 +1,5 @@
 #!/bin/sh
-unset WAYLAND_DISPLAY
+export MESA_GL_VERSION_OVERRIDE=3.3
 export WLR_RENDERER_ALLOW_SOFTWARE=1
 export WLR_NO_HARDWARE_CURSORS=1
-systemd-cat -t sway /usr/bin/sway
-
+systemd-cat -t sway /usr/bin/sway -c /etc/sway/config

@@ -7,5 +7,6 @@ DEPENDS:append = " dtc-native bison-native"
 #SRCREV = "ffc3fbe7e5418d16f492c78693c3c4fa41f06f27"
  
 SRC_URI += " file://0001-Resolve-poweroff-issue.patch \
+             file://0002-Disable-UART4-for-M4-core.patch \   
             "
 

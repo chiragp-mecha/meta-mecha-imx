@@ -1,0 +1,25 @@
+From d85d5f1739f69e47da1ee1475af1e34b9c2630c5 Mon Sep 17 00:00:00 2001
+From: chiragp-mechas <chiragp@mechasystems.com>
+Date: Mon, 1 Apr 2024 12:42:28 +0000
+Subject: [PATCH] Disable-UART4-for-M4-core
+
+---
+ plat/imx/imx8m/imx8mm/imx8mm_bl31_setup.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/plat/imx/imx8m/imx8mm/imx8mm_bl31_setup.c b/plat/imx/imx8m/imx8mm/imx8mm_bl31_setup.c
+index b2e9d10ae..9e80f1486 100644
+--- a/plat/imx/imx8m/imx8mm/imx8mm_bl31_setup.c
++++ b/plat/imx/imx8m/imx8mm/imx8mm_bl31_setup.c
+@@ -116,7 +116,7 @@ static const struct imx_rdc_cfg rdc[] = {
+ 	RDC_MDAn(RDC_MDA_M4, DID1),
+ 
+ 	/* peripherals domain permission */
+-	RDC_PDAPn(RDC_PDAP_UART4, D1R | D1W),
++	RDC_PDAPn(RDC_PDAP_UART4, D0R | D0W),
+ 	RDC_PDAPn(RDC_PDAP_UART2, D0R | D0W),
+ 	RDC_PDAPn(RDC_PDAP_UART1, D0R | D0W),
+ 
+-- 
+2.39.3
+

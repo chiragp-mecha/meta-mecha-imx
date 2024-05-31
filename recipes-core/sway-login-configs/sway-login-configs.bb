@@ -10,6 +10,8 @@ SRC_URI =   "file://bin/sway-greetd \
              file://lib-udev-rulesd/60-drm.rules \
              file://etc-greetd/config.toml \
              file://etc-greetd/sway-config \
+             file://etc-sway/config \
+             file://etc-sway/config-greeter \
              file://etc-pamd/greetd \
              file://etc-profiled/sway.sh \
              file://etc-profiled/welcome.sh \
@@ -38,7 +40,6 @@ do_install() {
 
     install -d ${D}/etc/greetd
     install -c -m 0644 ${WORKDIR}/etc-greetd/config.toml ${D}/etc/greetd
-    install -c -m 0644 ${WORKDIR}/etc-greetd/sway-config ${D}/etc/greetd
 
     install -d ${D}/etc/pam.d
     install -c -m 0644 ${WORKDIR}/etc-pamd/greetd ${D}/etc/pam.d
@@ -46,6 +47,10 @@ do_install() {
     install -d ${D}/etc/profile.d
     install -c -m 0644 ${WORKDIR}/etc-profiled/sway.sh ${D}/etc/profile.d
     install -c -m 0644 ${WORKDIR}/etc-profiled/welcome.sh ${D}/etc/profile.d
+
+    install -d ${D}/etc/sway
+    install -c -m 0644 ${WORKDIR}/etc-sway/config ${D}/etc/sway
+    install -c -m 0644 ${WORKDIR}/etc-sway/config-greeter ${D}/etc/sway
 }
 
 INSANE_SKIP_${PN}:append = "already-stripped"

@@ -8,8 +8,6 @@ SRC_URI =   "file://fw_env.config \
 
 S = "${WORKDIR}"
 
-FILES_${PN} = " ${systemd_unitdir}/system/greetd.service"
-
 do_install() {
     install -d ${D}/etc
     install -c -m 0644 ${WORKDIR}/fw_env.config ${D}/etc/

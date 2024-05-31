@@ -1,0 +1,30 @@
+From 4adf57207986c1e0e8d08ceb9ec56977c5835dc5 Mon Sep 17 00:00:00 2001
+From: chiragp-mechas <chiragp@mechasystems.com>
+Date: Thu, 7 Mar 2024 10:36:28 +0000
+Subject: [PATCH] Remove-1800MHz-CPUFREQ
+
+---
+ arch/arm64/boot/dts/freescale/imx8mm.dtsi | 7 -------
+ 1 file changed, 7 deletions(-)
+
+diff --git a/arch/arm64/boot/dts/freescale/imx8mm.dtsi b/arch/arm64/boot/dts/freescale/imx8mm.dtsi
+index 34b6e6759e37..b65ec56fea20 100755
+--- a/arch/arm64/boot/dts/freescale/imx8mm.dtsi
++++ b/arch/arm64/boot/dts/freescale/imx8mm.dtsi
+@@ -171,13 +171,6 @@ opp-1600000000 {
+ 			opp-suspend;
+ 		};
+ 
+-		opp-1800000000 {
+-			opp-hz = /bits/ 64 <1800000000>;
+-			opp-microvolt = <1000000>;
+-			opp-supported-hw = <0x8>, <0x3>;
+-			clock-latency-ns = <150000>;
+-			opp-suspend;
+-		};
+ 	};
+ 
+ 	resmem: reserved-memory {
+-- 
+2.39.3
+

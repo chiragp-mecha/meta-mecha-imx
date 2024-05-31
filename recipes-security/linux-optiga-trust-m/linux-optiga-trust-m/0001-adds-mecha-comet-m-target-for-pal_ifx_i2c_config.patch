@@ -57,7 +57,7 @@ index 0000000..5551097
 +
 +#include "pal_linux.h"
 +
-+pal_linux_t linux_events = {"/dev/i2c-1", 0};
++pal_linux_t linux_events = {"/dev/i2c-0", 0};
 +
 +#define GPIO_PIN_VDD  0 //not used as external power supply
 +#define GPIO_PIN_RESET 116 // GPIO4_20 SAI1_MCLK // 431 //GPIOH_4

@@ -1,0 +1,1 @@
+UBOOT_DTB_NAME="mecha-comet.dtb"
